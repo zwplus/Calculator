@@ -9,6 +9,7 @@
 #include <QStack>
 #include <QQueue>
 #include <math.h>
+#include<qmath.h>
 
 
 
@@ -45,6 +46,11 @@ public:
     QPushButton *button_rooting;
     QPushButton *button_left; //左括号
     QPushButton *button_right;//右括号
+    QPushButton *button_ln;
+    QPushButton *button_log;
+    QPushButton *button_cos;
+    QPushButton *button_sin;
+    QPushButton *button_tan;
 
     QPushButton *button_num0;
     QPushButton *button_num1;
@@ -86,6 +92,7 @@ public:
     QQueue<QString> Transfer(QQueue<QString>& exp);//中缀转后缀
 
     QString QCalculate(QString& l,QString& op,QString& r );//计算2数值
+    QString HCalculate(QString& op,QString& r);
 
     QString Calculate(QQueue<QString>& exp);//计算后缀表达式
 
