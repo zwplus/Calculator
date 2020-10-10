@@ -244,7 +244,7 @@ int Widget::matchingboth(QString &str1, const char *str2)
 int Widget::lastmatchingboth(QString &str1, const char *str2)
 {
     for(int i=str1.length();i>0;i--){
-        for(int j=0;j<strlen(str2);j++){
+        for( int j=0;j<(int)strlen(str2);j++){
             if(str1[i]==str2[j]){
                 return i;
             }
@@ -274,6 +274,7 @@ void Widget::button_option_clicked()
         data->setText("");
         line.clear();
         ClearLine=0;
+        jingzhi=10;
     }else if(text=="hex"||text=="oct"||text=="bin"){   //处理进制
         QString tmp=line.right(1);
 
@@ -356,7 +357,7 @@ void Widget::button_option_clicked()
     }else if(text=="*"||text=="/"||text=="^"||text=="%"||text=="log"||text==">"||text=="<"||text=="=="||text=="G"||text=="L"){  //乘除  平方
         QString tmp=line.right(1);
         if(tmp.length()){       //不能有连续的2次运算符
-            if(matchingboth(tmp,"(.+-*/^%bxhg><=GL")!=-1){
+            if(matchingboth(tmp,"(.+-*/^%bxg><=GLh")!=-1){
                 return;
             }
         }else{
@@ -373,10 +374,12 @@ void Widget::button_option_clicked()
         line+=text;
         jingzhi=10;
     }else if(text=="cos"||text=="sin"||text=="tan"||text=="ln"){
-        QString tmp=line.right(1);
-        if(tmp.length()){       //不能有连续的2次运算符
-            if(matchingboth(tmp,"0123456789ABCDEFxbh.ns")!=-1){
-                return;
+        if(!line.isEmpty()){
+            QString tmp=line.right(1);
+            if(tmp.length()){       //不能有连续的2次运算符
+                if(matchingboth(tmp,"0123456789ABCDEFxbh.ns")!=-1){
+                    return;
+                }
             }
         }
         line+=text;
@@ -405,20 +408,12 @@ void Widget::button_option_clicked()
             return;
         }
         if(tmp.length()){
-            if(matchingboth(tmp,"+-*/.(^%xbhsng")!=-1){
+            if(matchingboth(tmp,"+-*/.(^%xbsngh")!=-1){
                 return;
             }
         }else{
             return;
         }
-//        tmp=line.right(2);
-//        if(tmp.length()==2){
-//            if(tmp[1]=="0"&&jingzhi==8&&(matchingboth(tmp,"+-/*^%(")!=-1)){  //避免8进制0前缀与8进制0弄混
-//                return;
-//            }
-//        }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
-//            return;
-//        }
         line+=text;
         bracket_cnt--;
         jingzhi=10;
@@ -431,23 +426,7 @@ void Widget::button_option_clicked()
                     }else if(line.length()){
                         line.chop(1);
                     }
-               }
-//                else if(jingzhi==8){
-//                   QString tmp=line.right(2);
-//                   if(tmp.length()==2){
-//                       QString s=tmp.left(1);
-//                       if(tmp[1]==0&&(matchingboth(s,"01234567")==-1)){
-//                           line.chop(1);
-//                           jingzhi=10;
-//                       }else{
-//                           line.chop(1);
-//                       }
-//                   }else if(tmp.length()==1){
-//                       line.chop(1);
-//                       jingzhi=10;
-//                   }
-//                }
-                  else{
+               }else{
                    QString tmp=line.right(2);
                    if(tmp.length()==2){
                          if(tmp=="an"||tmp=="os"||tmp=="og"||tmp=="in"){
@@ -533,6 +512,7 @@ QQueue<QString> Widget::Split(const QString &exp)
             for(int j=0;j<3;j++){
                  hanshu+=exp[i+j];
             }
+            i=i+2;
             ret.enqueue(hanshu);
             hanshu.clear();
         }else if((exp[i]=="l"&&exp[i+1]=="n")||(exp[i]=="="&&exp[i+1]=="=")){
@@ -543,6 +523,7 @@ QQueue<QString> Widget::Split(const QString &exp)
             for(int j=0;j<2;j++){
                  hanshu+=exp[i+j];
             }
+            i=i+1;
             ret.enqueue(hanshu);
             hanshu.clear();
         }
@@ -568,7 +549,7 @@ QQueue<QString> Widget::Split(const QString &exp)
 
 QQueue<QString> Widget::Transfer(QQueue<QString> &exp)
 {
-    QStack<QString> stack;
+        QStack<QString> stack;
         QQueue<QString> ret;
         bool num_ok;
         bool ok;
@@ -785,8 +766,8 @@ QString Widget::HCalculate(QString &op, QString &r)
 {
     double right,result;
     QString ret="";
-    right=r.toDouble();
     if(!r.isEmpty()){
+        right=r.toDouble();
         if(op=="cos"){
             result=qCos(right);
         }else if(op=="sin"){
@@ -824,8 +805,6 @@ QString Widget::Calculate(QQueue<QString> &exp)
         if(num_ok){
             stack.push(symbol);  //数字压栈
         }else{
-
-
             if((symbol=="+")||(symbol=="-")||(symbol=="*")||(symbol=="/")||(symbol=="%")||(symbol=="^")||(symbol=="log")||(symbol==">")||(symbol=="<")||(symbol=="==")||symbol=="G"||symbol=="L"){
                 if(stack.size()<2){  //栈中数字小于2但有运算符
                     return "Error";

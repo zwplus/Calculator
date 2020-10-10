@@ -6,6 +6,7 @@
 #include<QLineEdit>
 #include<QLayout>
 #include<QString>
+#include<qstring.h>
 #include <QStack>
 #include <QQueue>
 #include <math.h>
@@ -30,33 +31,32 @@ public:
     ~Widget();
 
   private:
-
     QLineEdit *data;//输出行
-
+    //操作符
     QPushButton *button_clear;//回退一格
     QPushButton *button_clearall;//清除全部
-    QPushButton *button_equal;//=
-    QPushButton *button_jia;//+
-    QPushButton *button_jian;//-
-    QPushButton *button_cheng;//*
-    QPushButton *button_chu;//  /
+    QPushButton *button_equal;//等于号
+    QPushButton *button_jia;//加号
+    QPushButton *button_jian;//减号
+    QPushButton *button_cheng;//乘号
+    QPushButton *button_chu;//  除号
     QPushButton *button_square;// 平方
     QPushButton *button_point;//小数点
     QPushButton *button_mod;//求余
-    QPushButton *button_rooting;
+//    QPushButton *button_rooting;
     QPushButton *button_left; //左括号
     QPushButton *button_right;//右括号
-    QPushButton *button_ln;
-    QPushButton *button_log;
-    QPushButton *button_cos;
-    QPushButton *button_sin;
-    QPushButton *button_tan;
-    QPushButton *button_more;
-    QPushButton *button_less;
-    QPushButton *button_isequal;
+    QPushButton *button_ln;//底数为e的对数函数
+    QPushButton *button_log;//对数函数
+    QPushButton *button_cos;//余弦函数
+    QPushButton *button_sin;//正弦函数
+    QPushButton *button_tan;//正切函数
+    QPushButton *button_more;//大于号
+    QPushButton *button_less;//小于号
+    QPushButton *button_isequal;//判断是否相等
     QPushButton *button_GCD;//最大公约数
     QPushButton *button_LCM;//最大公倍数
-
+    //数字
     QPushButton *button_num0;
     QPushButton *button_num1;
     QPushButton *button_num2;
@@ -73,11 +73,10 @@ public:
     QPushButton *button_numD;
     QPushButton *button_numE;
     QPushButton *button_numF;
-
     //进制表示位
-    QPushButton *button_bin;
-    QPushButton *button_oct;
-    QPushButton *button_hex;
+    QPushButton *button_bin;//二进制
+    QPushButton *button_oct;//八进制
+    QPushButton *button_hex;//十六进制
 
 public:
     void iniUI();
@@ -92,10 +91,14 @@ private slots:
 public:
     QString vildnum(QString str);
 
-    QQueue<QString> Split(const QString& exp);//分离前缀
+    QQueue<QString> Split(const QString& exp);//分离中缀
+
+
     QQueue<QString> Transfer(QQueue<QString>& exp);//中缀转后缀
 
-    QString QCalculate(QString& l,QString& op,QString& r );//计算2数值
+    QString QCalculate(QString& l,QString& op,QString& r );
+
+
     QString HCalculate(QString& op,QString& r);
 
     QString Calculate(QQueue<QString>& exp);//计算后缀表达式
@@ -111,3 +114,4 @@ private:
 };
 
 #endif // WIDGET_H
+
