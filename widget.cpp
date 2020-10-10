@@ -56,6 +56,12 @@ void Widget::iniUI()
     button_cos=new QPushButton("cos");
     button_sin=new QPushButton("sin");
     button_tan=new QPushButton("tan");
+    button_more=new QPushButton(">");
+    button_less=new QPushButton("<");
+    button_isequal=new QPushButton("==");
+//    button_fang=new QPushButton("1/x");
+    button_GCD=new QPushButton("最大公约数");
+    button_LCM=new QPushButton("最小公倍数");
 
 
     button_clear=new QPushButton("clear");
@@ -82,7 +88,12 @@ void Widget::iniUI()
     connect(button_cos,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
     connect(button_sin,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
     connect(button_tan,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
-
+    connect(button_more,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_less,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_isequal,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+//    connect(button_fang,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_GCD,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_LCM,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
 
 
 
@@ -109,44 +120,50 @@ void Widget::iniUI()
 
 
     //布局
-    data->setFixedHeight(30);
-    button_num0->setMinimumHeight(40);
-    button_num1->setMinimumHeight(40);
-    button_num2->setMinimumHeight(40);
-    button_num3->setMinimumHeight(40);
-    button_num4->setMinimumHeight(40);
-    button_num5->setMinimumHeight(40);
-    button_num6->setMinimumHeight(40);
-    button_num7->setMinimumHeight(40);
-    button_num8->setMinimumHeight(40);
-    button_num9->setMinimumHeight(40);
-    button_numA->setMinimumHeight(40);
-    button_numB->setMinimumHeight(40);
-    button_numC->setMinimumHeight(40);
-    button_numD->setMinimumHeight(40);
-    button_numE->setMinimumHeight(40);
-    button_numF->setMinimumHeight(40);
+    data->setFixedHeight(45);
+    button_num0->setMinimumHeight(45);
+    button_num1->setMinimumHeight(45);
+    button_num2->setMinimumHeight(45);
+    button_num3->setMinimumHeight(45);
+    button_num4->setMinimumHeight(45);
+    button_num5->setMinimumHeight(45);
+    button_num6->setMinimumHeight(45);
+    button_num7->setMinimumHeight(45);
+    button_num8->setMinimumHeight(45);
+    button_num9->setMinimumHeight(45);
+    button_numA->setMinimumHeight(45);
+    button_numB->setMinimumHeight(45);
+    button_numC->setMinimumHeight(45);
+    button_numD->setMinimumHeight(45);
+    button_numE->setMinimumHeight(45);
+    button_numF->setMinimumHeight(45);
 
-    button_equal->setMinimumHeight(40);
-    button_jia->setMinimumHeight(40);
-    button_jian->setMinimumHeight(40);
-    button_cheng->setMinimumHeight(40);
-    button_chu->setMinimumHeight(40);
-    button_square->setMinimumHeight(40);
-    button_mod->setMinimumHeight(40);
-    button_left->setMinimumHeight(40);
-    button_right->setMinimumHeight(40);
-    button_clear->setMinimumHeight(40);
-    button_hex->setMinimumHeight(40);
-    button_oct->setMinimumHeight(40);
-    button_bin->setMinimumHeight(40);
-    button_clearall->setMinimumHeight(40);
-    button_point->setMinimumHeight(40);
-    button_ln->setMinimumHeight(40);
-    button_log->setMinimumHeight(40);
-    button_cos->setMinimumHeight(40);
-    button_sin->setMinimumHeight(40);
-    button_tan->setMinimumHeight(40);
+    button_equal->setMinimumHeight(45);
+    button_jia->setMinimumHeight(45);
+    button_jian->setMinimumHeight(45);
+    button_cheng->setMinimumHeight(45);
+    button_chu->setMinimumHeight(45);
+    button_square->setMinimumHeight(45);
+    button_mod->setMinimumHeight(45);
+    button_left->setMinimumHeight(45);
+    button_right->setMinimumHeight(45);
+    button_clear->setMinimumHeight(45);
+    button_hex->setMinimumHeight(45);
+    button_oct->setMinimumHeight(45);
+    button_bin->setMinimumHeight(45);
+    button_clearall->setMinimumHeight(45);
+    button_point->setMinimumHeight(45);
+    button_ln->setMinimumHeight(45);
+    button_log->setMinimumHeight(45);
+    button_cos->setMinimumHeight(45);
+    button_sin->setMinimumHeight(45);
+    button_tan->setMinimumHeight(45);
+    button_more->setMinimumHeight(45);
+    button_less->setMinimumHeight(45);
+    button_isequal->setMinimumHeight(45);
+//    button_fang->setMinimumHeight(40);
+    button_GCD->setMinimumHeight(45);
+    button_LCM->setMinimumHeight(45);
 
 
 
@@ -156,7 +173,7 @@ void Widget::iniUI()
 
    layout->addWidget(data,1,1,1,6,Qt::Alignment());
 
-   layout->addWidget(button_clearall,2,6,Qt::Alignment());
+   layout->addWidget(button_GCD,2,6,Qt::Alignment());
    layout->addWidget(button_hex,2,5,Qt::Alignment());
    layout->addWidget(button_oct,2,4,Qt::Alignment());
    layout->addWidget(button_bin,2,3,Qt::Alignment());
@@ -168,21 +185,22 @@ void Widget::iniUI()
    layout->addWidget(button_right,3,3,Qt::Alignment());
    layout->addWidget(button_mod,3,4,Qt::Alignment());
    layout->addWidget(button_cos,3,5,Qt::Alignment());
-   layout->addWidget(button_clear,3,6,Qt::Alignment());
+
+   layout->addWidget(button_LCM,3,6,Qt::Alignment());
 
    layout->addWidget(button_jia,4,1,Qt::Alignment());
    layout->addWidget(button_jian,4,2,Qt::Alignment());
    layout->addWidget(button_cheng,4,3,Qt::Alignment());
    layout->addWidget(button_chu,4,4,Qt::Alignment());
    layout->addWidget(button_sin,4,5,Qt::Alignment());
-   layout->addWidget(button_equal,4,6,Qt::Alignment());
+   layout->addWidget(button_tan,4,6,Qt::Alignment());
 
    layout->addWidget(button_num5,5,1,Qt::Alignment());
    layout->addWidget(button_num6,5,2,Qt::Alignment());
    layout->addWidget(button_num7,5,3,Qt::Alignment());
    layout->addWidget(button_num8,5,4,Qt::Alignment());
    layout->addWidget(button_num9,5,5,Qt::Alignment());
-   layout->addWidget(button_tan,5,6,Qt::Alignment());
+   layout->addWidget(button_equal,5,6,Qt::Alignment());
 
    layout->addWidget(button_num0,6,1,Qt::Alignment());
    layout->addWidget(button_num1,6,2,Qt::Alignment());
@@ -197,6 +215,14 @@ void Widget::iniUI()
    layout->addWidget(button_numD,7,4,Qt::Alignment());
    layout->addWidget(button_numE,7,5,Qt::Alignment());
    layout->addWidget(button_numF,7,6,Qt::Alignment());
+
+   layout->addWidget(button_more,8,1,Qt::Alignment());
+   layout->addWidget(button_less,8,2,Qt::Alignment());
+   layout->addWidget(button_isequal,8,3,Qt::Alignment());
+   layout->addWidget(button_clearall,8,5,1,2,Qt::Alignment());
+
+
+     layout->addWidget(button_clear,8,4,Qt::Alignment());
 
    layout->setMargin(12);
    setLayout(layout);
@@ -237,6 +263,10 @@ void Widget::button_option_clicked()
     QString text;
     if(btn->text()=="X^Y"){
         text="^";
+    }else if(btn->text()=="最大公约数"){
+        text="G";
+    }else if(btn->text()=="最小公倍数"){
+        text="L";
     }else{
         text=btn->text();
     }
@@ -257,7 +287,7 @@ void Widget::button_option_clicked()
             line+="0x";
             jingzhi=16;
         }else if(text=="oct"){
-            line+="0";
+            line+="0h";
             jingzhi=8;
         }else if(text=="bin"){
             line+="0b";
@@ -296,8 +326,8 @@ void Widget::button_option_clicked()
     }else if(text=="+"||text=="-"){    //如何区分十进0和8进制负号位
         QString tmp=line.right(1);
 
-        if(tmp.length()&&(tmp[0]=="."||tmp[0]=="b"||tmp[0]=="x")){
-            return;     //加减号前面不能为小数点,b,x
+        if(tmp.length()&&(tmp[0]=="."||tmp[0]=="b"||tmp[0]=="x"||tmp[0]=="h")){
+            return;     //加减号前面不能为小数点,b,x,h
         }
 
         tmp=line.right(2);
@@ -306,13 +336,13 @@ void Widget::button_option_clicked()
                 return;
             }
         }
-        if(tmp.length()==2){
-            if(tmp[1]=="0"&&jingzhi==8&&(matchingboth(tmp,"+-/*^%(")==0)){  //避免8进制0前缀与8进制0弄混
-                return;
-            }
-        }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
-            return;
-        }
+//        if(tmp.length()==2){
+//            if(tmp[1]=="0"&&jingzhi==8&&(matchingboth(tmp,"+-/*^%(")==0)){  //避免8进制0前缀与8进制0弄混
+//                return;
+//            }
+//        }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
+//            return;
+//        }
 
         if(tmp.length()==2){        //前面不能有连续2次加减乘除，连续2位可以免去负号的影响
             if(tmp[0]=="+"||tmp[0]=="-"||tmp[0]=="*"||tmp[0]=="/"||tmp[0]=="("||tmp[0]=="^"||tmp[0]=="%"){
@@ -323,29 +353,29 @@ void Widget::button_option_clicked()
         }
         line+=text;
         jingzhi=10;
-    }else if(text=="*"||text=="/"||text=="^"||text=="%"||text=="log"){  //乘除  平方
+    }else if(text=="*"||text=="/"||text=="^"||text=="%"||text=="log"||text==">"||text=="<"||text=="=="||text=="G"||text=="L"){  //乘除  平方
         QString tmp=line.right(1);
         if(tmp.length()){       //不能有连续的2次运算符
-            if(matchingboth(tmp,"(.+-*/^%bxg")!=-1){
+            if(matchingboth(tmp,"(.+-*/^%bxhg><=GL")!=-1){
                 return;
             }
         }else{
             return;
         }
-        tmp=line.right(2);
-        if(tmp.length()==2){
-            if(tmp[1]=="0"&&jingzhi==8&&(matchingboth(tmp,"+-/*^%(")==0)){  //避免8进制0前缀与8进制0弄混
-                return;
-            }
-        }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
-            return;
-        }
+//        tmp=line.right(2);
+//        if(tmp.length()==2){
+//            if(tmp[1]=="0"&&jingzhi==8&&(matchingboth(tmp,"+-/*^%(")==0)){  //避免8进制0前缀与8进制0弄混
+//                return;
+//            }
+//        }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
+//            return;
+//        }
         line+=text;
         jingzhi=10;
     }else if(text=="cos"||text=="sin"||text=="tan"||text=="ln"){
         QString tmp=line.right(1);
         if(tmp.length()){       //不能有连续的2次运算符
-            if(matchingboth(tmp,"0123456789ABCDEFxb.ns")!=-1){
+            if(matchingboth(tmp,"0123456789ABCDEFxbh.ns")!=-1){
                 return;
             }
         }
@@ -354,7 +384,7 @@ void Widget::button_option_clicked()
     }else if(text=="("){   //左括号
         QString tmp=line.right(1);
         if(tmp.length()){
-            if(matchingboth(tmp,")0123456789ABCDEFxb.")!=-1){
+            if(matchingboth(tmp,")0123456789ABCDEFxbh.")!=-1){
                 return;
             }
         }
@@ -375,74 +405,77 @@ void Widget::button_option_clicked()
             return;
         }
         if(tmp.length()){
-            if(matchingboth(tmp,"+-*/.(^%xbsng")!=-1){
+            if(matchingboth(tmp,"+-*/.(^%xbhsng")!=-1){
                 return;
             }
         }else{
             return;
         }
-        tmp=line.right(2);
-        if(tmp.length()==2){
-            if(tmp[1]=="0"&&jingzhi==8&&(matchingboth(tmp,"+-/*^%(")!=-1)){  //避免8进制0前缀与8进制0弄混
-                return;
-            }
-        }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
-            return;
-        }
+//        tmp=line.right(2);
+//        if(tmp.length()==2){
+//            if(tmp[1]=="0"&&jingzhi==8&&(matchingboth(tmp,"+-/*^%(")!=-1)){  //避免8进制0前缀与8进制0弄混
+//                return;
+//            }
+//        }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
+//            return;
+//        }
         line+=text;
         bracket_cnt--;
         jingzhi=10;
     }else if(text=="clear"){
-        if(jingzhi==16||jingzhi==2){
+        if(jingzhi==16||jingzhi==2||jingzhi==8){
                    QString tmp=line.right(2);
-                    if(tmp[1]=="x"||tmp[1]=="b"){
+                    if(tmp[1]=="x"||tmp[1]=="b"||tmp[1]=="h"){
                            line.chop(2);
                            jingzhi=10;
                     }else if(line.length()){
                         line.chop(1);
                     }
-               }else if(jingzhi==8){
-                   QString tmp=line.right(2);
-                   if(tmp.length()==2){
-                       QString s=tmp.left(1);
-                       if(tmp[1]==0&&(matchingboth(s,"01234567")==-1)){
-                           line.chop(1);
-                           jingzhi=10;
-                       }else{
-                           line.chop(1);
-                       }
-                   }else if(tmp.length()==1){
-                       line.chop(1);
-                       jingzhi=10;
-                   }
-                }else{
+               }
+//                else if(jingzhi==8){
+//                   QString tmp=line.right(2);
+//                   if(tmp.length()==2){
+//                       QString s=tmp.left(1);
+//                       if(tmp[1]==0&&(matchingboth(s,"01234567")==-1)){
+//                           line.chop(1);
+//                           jingzhi=10;
+//                       }else{
+//                           line.chop(1);
+//                       }
+//                   }else if(tmp.length()==1){
+//                       line.chop(1);
+//                       jingzhi=10;
+//                   }
+//                }
+                  else{
                    QString tmp=line.right(2);
                    if(tmp.length()==2){
                          if(tmp=="an"||tmp=="os"||tmp=="og"||tmp=="in"){
                               line.chop(3);
-                         }else if(tmp=="ln"){
+                         }else if(tmp=="ln"||tmp=="=="){
                             line.chop(2);
                          }
                    }
                    tmp=line.right(1);
                    if(tmp.length()==1){
-                       if(tmp[0]=="x"||tmp[0]=="b"){
+                       if(tmp[0]=="x"||tmp[0]=="b"||tmp[0]=="h"){
                            line.chop(2);
-                       }else{
+                       }
+                       else{
                            line.chop(1);
                        }
                    }
-
        }
 
     }else if(text=="clearall"){
         line.clear();
         bracket_cnt=0;
+        jingzhi=10;
     }else if(text=="="&&line.length()){
         QString ret=Result(line);
         if(ret==NULL){
             line+=":";
-            line+="除数不能为0";
+            line+="请注意除数为0或其他不能小于等于0的情况";
         }else if(ret=="Error"){
             line+=":";
             line+="格式出错";
@@ -482,10 +515,10 @@ QQueue<QString> Widget::Split(const QString &exp)
     QString num="";
     QString hanshu="";
     for(int i=0;i<exp.length();i++){
-        if(exp[i]=="."||(exp[i]>="0"&&exp[i]<="9")||(exp[i]>="A"&&exp[i]<="F")||exp[i]=="x"||exp[i]=="b"){
+        if(exp[i]=="."||(exp[i]>="0"&&exp[i]<="9")||(exp[i]>="A"&&exp[i]<="F")||exp[i]=="x"||exp[i]=="b"||exp[i]=="h"){
             num+=exp[i];
         }
-        else if(exp[i]=="("||exp[i]==")"||exp[i]=="*"||exp[i]=="/"||exp[i]=="^"||exp[i]=="%"){
+        else if(exp[i]=="("||exp[i]==")"||exp[i]=="*"||exp[i]=="/"||exp[i]=="^"||exp[i]=="%"||exp[i]==">"||exp[i]=="<"||exp[i]=="G"||exp[i]=="L"){
             if(!num.isEmpty()){
                 ret.enqueue(num);
                 num.clear();
@@ -502,7 +535,11 @@ QQueue<QString> Widget::Split(const QString &exp)
             }
             ret.enqueue(hanshu);
             hanshu.clear();
-        }else if(exp[i]=="l"&&exp[i+1]=="n"){
+        }else if((exp[i]=="l"&&exp[i+1]=="n")||(exp[i]=="="&&exp[i+1]=="=")){
+            if(!num.isEmpty()){
+                ret.enqueue(num);
+                num.clear();
+            }
             for(int j=0;j<2;j++){
                  hanshu+=exp[i+j];
             }
@@ -545,21 +582,70 @@ QQueue<QString> Widget::Transfer(QQueue<QString> &exp)
                         symbol=symbol.mid(2);
                         val=symbol.toInt(&ok,16);
                         symbol=symbol.setNum(val,10);
-                }else if(symbol.startsWith("0b")){
+                }else if(symbol.startsWith("-0x")){
+                    int val;
+                    symbol=symbol.mid(3);
+                    val=symbol.toInt(&ok,16);
+                    symbol=symbol.setNum(val,10);
+                    symbol="-"+symbol;
+                }else if(symbol.startsWith("+0x")){
+                    int val;
+                    symbol=symbol.mid(3);
+                    val=symbol.toInt(&ok,16);
+                    symbol=symbol.setNum(val,10);
+                    symbol="+"+symbol;
+                }
+                else if(symbol.startsWith("0b")){
                     symbol=symbol.mid(2);
                     int val=symbol.toInt(&ok,2);
                     symbol=symbol.setNum(val,10);
-                }else if(symbol.left(1)=="0"){
+                }else if(symbol.startsWith("-0b")){
                     int val;
-                    symbol=symbol.mid(1);
+                    symbol=symbol.mid(3);
+                    val=symbol.toInt(&ok,2);
+                    symbol=symbol.setNum(val,10);
+                    symbol="-"+symbol;
+                }else if(symbol.startsWith("+0b")){
+                    int val;
+                    symbol=symbol.mid(3);
+                    val=symbol.toInt(&ok,2);
+                    symbol=symbol.setNum(val,10);
+                    symbol="+"+symbol;
+                }
+                else if(symbol.startsWith("0h")){
+                    int val;
+                    symbol=symbol.mid(2);
                     val=symbol.toInt(&ok,8);
                     symbol=symbol.setNum(val,10);
+                }else if(symbol.startsWith("-0h")){
+                    int val;
+                    symbol=symbol.mid(3);
+                    val=symbol.toInt(&ok,8);
+                    symbol=symbol.setNum(val,10);
+                    symbol="-"+symbol;
+                }else if(symbol.startsWith("+0h")){
+                    int val;
+                    symbol=symbol.mid(3);
+                    val=symbol.toInt(&ok,8);
+                    symbol=symbol.setNum(val,10);
+                    symbol="+"+symbol;
                 }
             }
             symbol.toDouble(&num_ok);//如果symbol是数字字符串则会被转成double，同时num_ok为true
 
             if(num_ok==true){
                 stack.push(symbol);//数字入栈；
+            }else if(symbol=="L"||symbol=="G"){
+                while(!stack.isEmpty()&&(stack.top())!="("){
+                    ret.enqueue(stack.pop());
+                }
+                stack.push(symbol);
+            }
+            else if(symbol==">"||symbol=="<"||symbol=="=="){
+                while(!stack.isEmpty()&&(stack.top())!="("){
+                    ret.enqueue(stack.pop());
+                }
+                stack.push(symbol);
             }else if(symbol=="+"||symbol=="-"){
                 while (!stack.isEmpty()&&(stack.top())!="(") {
                    ret.enqueue(stack.pop());
@@ -632,6 +718,63 @@ QString Widget::QCalculate(QString &l, QString &op, QString &r)
         }else{
             result=qLn(right)/qLn(left);
         }
+    }else if(op==">"){
+        if(left>right){
+            result=1;
+        }else{
+            result=0;
+        }
+    }else if(op=="<"){
+        if(left<right){
+            result=1;
+        }else{
+            result=0;
+        }
+    }else if(op=="=="){
+        if(left==right){
+            result=1;
+        }else{
+            result=0;
+        }
+    }else if(op=="L"){
+        int a=(int)left;
+        int b=(int)right;
+        if(a==0||b==0){
+            return NULL;
+        }
+        int res;
+        int mid;
+        if(b>a){
+            mid=b;
+            b=a;
+            a=mid;
+        }
+        while (a%b) {
+           res=a;
+           a=b;
+           b=res%b;
+        }
+        result=left*right/b;
+
+    }else if(op=="G"){
+        int a=(int)left;
+        int b=(int)right;
+        if(a==0||b==0){
+            return NULL;
+        }
+        int res;
+        int mid;
+        if(b>a){
+            mid=b;
+            b=a;
+            a=mid;
+        }
+        while (a%b) {
+           res=a;
+           a=b;
+           b=res%b;
+        }
+        result=b;
     }
 
    ret.sprintf("%f",result);
@@ -643,22 +786,26 @@ QString Widget::HCalculate(QString &op, QString &r)
     double right,result;
     QString ret="";
     right=r.toDouble();
-
-    if(op=="cos"){
-        result=qCos(right);
-    }else if(op=="sin"){
-        result=qSin(right);
-    }else if(op=="tan"){
-        result=qTan(right);
-    }else if(op=="ln"){
-        if(right>0){
-            result=qLn(right);
-        }else{
-            return NULL;
+    if(!r.isEmpty()){
+        if(op=="cos"){
+            result=qCos(right);
+        }else if(op=="sin"){
+            result=qSin(right);
+        }else if(op=="tan"){
+            result=qTan(right);
+        }else if(op=="ln"){
+            if(right>0){
+                result=qLn(right);
+            }else{
+                return NULL;
+            }
         }
+        ret.sprintf("%f",result);
+        return ret;
+    }else{
+         return NULL;
     }
-    ret.sprintf("%f",result);
-    return ret;
+
 }
 
 
@@ -671,6 +818,7 @@ QString Widget::Calculate(QQueue<QString> &exp)
 
     while(!exp.isEmpty()){
         symbol=exp.dequeue();
+
         symbol.toDouble(&num_ok);
 
         if(num_ok){
@@ -678,7 +826,7 @@ QString Widget::Calculate(QQueue<QString> &exp)
         }else{
 
 
-            if((symbol=="+")||(symbol=="-")||(symbol=="*")||(symbol=="/")||(symbol=="%")||(symbol=="^")||(symbol=="log")){
+            if((symbol=="+")||(symbol=="-")||(symbol=="*")||(symbol=="/")||(symbol=="%")||(symbol=="^")||(symbol=="log")||(symbol==">")||(symbol=="<")||(symbol=="==")||symbol=="G"||symbol=="L"){
                 if(stack.size()<2){  //栈中数字小于2但有运算符
                     return "Error";
                 }
@@ -686,7 +834,10 @@ QString Widget::Calculate(QQueue<QString> &exp)
                 L=stack.pop();
                 ret=QCalculate(L,symbol,R);
             }else{
-                R=R=stack.pop();
+                if(stack.isEmpty()){
+                    return "Error";
+                }
+                R=stack.pop();
                 ret=HCalculate(symbol,R);
             }
             if(ret==NULL){

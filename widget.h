@@ -51,6 +51,11 @@ public:
     QPushButton *button_cos;
     QPushButton *button_sin;
     QPushButton *button_tan;
+    QPushButton *button_more;
+    QPushButton *button_less;
+    QPushButton *button_isequal;
+    QPushButton *button_GCD;//最大公约数
+    QPushButton *button_LCM;//最大公倍数
 
     QPushButton *button_num0;
     QPushButton *button_num1;
@@ -68,7 +73,6 @@ public:
     QPushButton *button_numD;
     QPushButton *button_numE;
     QPushButton *button_numF;
-//    QPushButton *button_numH;
 
     //进制表示位
     QPushButton *button_bin;
