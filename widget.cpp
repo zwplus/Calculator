@@ -50,6 +50,13 @@ void Widget::iniUI()
     button_mod=new QPushButton("%");
     button_left=new QPushButton("(");
     button_right=new QPushButton(")");
+    button_point=new QPushButton(".");
+    button_ln=new QPushButton("ln");
+    button_log=new QPushButton("log");
+    button_cos=new QPushButton("cos");
+    button_sin=new QPushButton("sin");
+    button_tan=new QPushButton("tan");
+
 
     button_clear=new QPushButton("clear");
     button_clearall=new QPushButton("clearall");
@@ -69,6 +76,17 @@ void Widget::iniUI()
     connect(button_right,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
     connect(button_mod,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
     connect(button_equal,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_point,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_ln,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_log,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_cos,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_sin,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+    connect(button_tan,SIGNAL(clicked(bool)),this,SLOT(button_option_clicked()));
+
+
+
+
+
 
 
 
@@ -123,7 +141,12 @@ void Widget::iniUI()
     button_oct->setMinimumHeight(40);
     button_bin->setMinimumHeight(40);
     button_clearall->setMinimumHeight(40);
-
+    button_point->setMinimumHeight(40);
+    button_ln->setMinimumHeight(40);
+    button_log->setMinimumHeight(40);
+    button_cos->setMinimumHeight(40);
+    button_sin->setMinimumHeight(40);
+    button_tan->setMinimumHeight(40);
 
 
 
@@ -131,43 +154,49 @@ void Widget::iniUI()
 
     QGridLayout * layout = new QGridLayout;
 
-   layout->addWidget(data,1,1,1,5,Qt::Alignment());
+   layout->addWidget(data,1,1,1,6,Qt::Alignment());
 
-   layout->addWidget(button_clearall,2,5,Qt::Alignment());
-   layout->addWidget(button_hex,2,4,Qt::Alignment());
-   layout->addWidget(button_oct,2,3,Qt::Alignment());
-   layout->addWidget(button_bin,2,2,Qt::Alignment());
-   layout->addWidget(button_numA,2,1,Qt::Alignment());
+   layout->addWidget(button_clearall,2,6,Qt::Alignment());
+   layout->addWidget(button_hex,2,5,Qt::Alignment());
+   layout->addWidget(button_oct,2,4,Qt::Alignment());
+   layout->addWidget(button_bin,2,3,Qt::Alignment());
+   layout->addWidget(button_log,2,2,Qt::Alignment());
+   layout->addWidget(button_ln,2,1,Qt::Alignment());
 
    layout->addWidget(button_square,3,1,Qt::Alignment());
    layout->addWidget(button_left,3,2,Qt::Alignment());
    layout->addWidget(button_right,3,3,Qt::Alignment());
    layout->addWidget(button_mod,3,4,Qt::Alignment());
-   layout->addWidget(button_clear,3,5,Qt::Alignment());
+   layout->addWidget(button_cos,3,5,Qt::Alignment());
+   layout->addWidget(button_clear,3,6,Qt::Alignment());
 
    layout->addWidget(button_jia,4,1,Qt::Alignment());
    layout->addWidget(button_jian,4,2,Qt::Alignment());
    layout->addWidget(button_cheng,4,3,Qt::Alignment());
    layout->addWidget(button_chu,4,4,Qt::Alignment());
-   layout->addWidget(button_equal,4,5,Qt::Alignment());
+   layout->addWidget(button_sin,4,5,Qt::Alignment());
+   layout->addWidget(button_equal,4,6,Qt::Alignment());
 
    layout->addWidget(button_num5,5,1,Qt::Alignment());
    layout->addWidget(button_num6,5,2,Qt::Alignment());
    layout->addWidget(button_num7,5,3,Qt::Alignment());
    layout->addWidget(button_num8,5,4,Qt::Alignment());
    layout->addWidget(button_num9,5,5,Qt::Alignment());
+   layout->addWidget(button_tan,5,6,Qt::Alignment());
 
    layout->addWidget(button_num0,6,1,Qt::Alignment());
    layout->addWidget(button_num1,6,2,Qt::Alignment());
    layout->addWidget(button_num2,6,3,Qt::Alignment());
    layout->addWidget(button_num3,6,4,Qt::Alignment());
    layout->addWidget(button_num4,6,5,Qt::Alignment());
+   layout->addWidget(button_point,6,6,Qt::Alignment());
 
-   layout->addWidget(button_numB,7,1,Qt::Alignment());
-   layout->addWidget(button_numC,7,2,Qt::Alignment());
-   layout->addWidget(button_numD,7,3,Qt::Alignment());
-   layout->addWidget(button_numE,7,4,Qt::Alignment());
-   layout->addWidget(button_numF,7,5,Qt::Alignment());
+   layout->addWidget(button_numA,7,1,Qt::Alignment());
+   layout->addWidget(button_numB,7,2,Qt::Alignment());
+   layout->addWidget(button_numC,7,3,Qt::Alignment());
+   layout->addWidget(button_numD,7,4,Qt::Alignment());
+   layout->addWidget(button_numE,7,5,Qt::Alignment());
+   layout->addWidget(button_numF,7,6,Qt::Alignment());
 
    layout->setMargin(12);
    setLayout(layout);
@@ -259,7 +288,7 @@ void Widget::button_option_clicked()
             return;   //小数点前为空
         }
 
-        int pos=lastmatchingboth(line,"+-*/.()%^");//碰到加减乘除就会停，这样就把搜索范围控制在一个小数点内了
+        int pos=lastmatchingboth(line,"+-*/.()%^sng");//碰到加减乘除就会停，这样就把搜索范围控制在一个小数点内了
         if(pos!=-1 &&line[pos]=="."){       //一串数字只能有一个小数点
             return ;
         }
@@ -273,14 +302,17 @@ void Widget::button_option_clicked()
 
         tmp=line.right(2);
         if(tmp.length()==2){
+            if((tmp=="ln"||tmp=="og")&&text=="-"){
+                return;
+            }
+        }
+        if(tmp.length()==2){
             if(tmp[1]=="0"&&jingzhi==8&&(matchingboth(tmp,"+-/*^%(")==0)){  //避免8进制0前缀与8进制0弄混
                 return;
             }
         }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
             return;
         }
-
-
 
         if(tmp.length()==2){        //前面不能有连续2次加减乘除，连续2位可以免去负号的影响
             if(tmp[0]=="+"||tmp[0]=="-"||tmp[0]=="*"||tmp[0]=="/"||tmp[0]=="("||tmp[0]=="^"||tmp[0]=="%"){
@@ -291,10 +323,10 @@ void Widget::button_option_clicked()
         }
         line+=text;
         jingzhi=10;
-    }else if(text=="*"||text=="/"||text=="^"||text=="%"){  //乘除  平方
+    }else if(text=="*"||text=="/"||text=="^"||text=="%"||text=="log"){  //乘除  平方
         QString tmp=line.right(1);
         if(tmp.length()){       //不能有连续的2次运算符
-            if(matchingboth(tmp,"(.+-*/^%bx")!=-1){
+            if(matchingboth(tmp,"(.+-*/^%bxg")!=-1){
                 return;
             }
         }else{
@@ -307,6 +339,15 @@ void Widget::button_option_clicked()
             }
         }else if(tmp.length()==1&&jingzhi==8&&tmp[0]=="0"){
             return;
+        }
+        line+=text;
+        jingzhi=10;
+    }else if(text=="cos"||text=="sin"||text=="tan"||text=="ln"){
+        QString tmp=line.right(1);
+        if(tmp.length()){       //不能有连续的2次运算符
+            if(matchingboth(tmp,"0123456789ABCDEFxb.ns")!=-1){
+                return;
+            }
         }
         line+=text;
         jingzhi=10;
@@ -334,7 +375,7 @@ void Widget::button_option_clicked()
             return;
         }
         if(tmp.length()){
-            if(matchingboth(tmp,"+-*/.(^%xb")!=-1){
+            if(matchingboth(tmp,"+-*/.(^%xbsng")!=-1){
                 return;
             }
         }else{
@@ -374,15 +415,23 @@ void Widget::button_option_clicked()
                        line.chop(1);
                        jingzhi=10;
                    }
-       }else{
-           QString tmp=line.right(1);
-           if(tmp.length()==1){
-               if(tmp[0]=="x"||tmp[0]=="b"){
-                   line.chop(2);
-               }else{
-                   line.chop(1);
-               }
-           }
+                }else{
+                   QString tmp=line.right(2);
+                   if(tmp.length()==2){
+                         if(tmp=="an"||tmp=="os"||tmp=="og"||tmp=="in"){
+                              line.chop(3);
+                         }else if(tmp=="ln"){
+                            line.chop(2);
+                         }
+                   }
+                   tmp=line.right(1);
+                   if(tmp.length()==1){
+                       if(tmp[0]=="x"||tmp[0]=="b"){
+                           line.chop(2);
+                       }else{
+                           line.chop(1);
+                       }
+                   }
 
        }
 
@@ -431,7 +480,7 @@ QQueue<QString> Widget::Split(const QString &exp)
 {
     QQueue<QString> ret;
     QString num="";
-
+    QString hanshu="";
     for(int i=0;i<exp.length();i++){
         if(exp[i]=="."||(exp[i]>="0"&&exp[i]<="9")||(exp[i]>="A"&&exp[i]<="F")||exp[i]=="x"||exp[i]=="b"){
             num+=exp[i];
@@ -442,6 +491,23 @@ QQueue<QString> Widget::Split(const QString &exp)
                 num.clear();
             }
             ret.enqueue(exp[i]);
+        }else if((exp[i]=="c"&&exp[i+1]=="o")||(exp[i]=="s"&&exp[i+1]=="i")||(exp[i]=="t"&&exp[i+1]=="a")||(exp[i]=="l"&&exp[i+1]=="o")){
+            if(!num.isEmpty()){
+                ret.enqueue(num);
+                num.clear();
+            }
+
+            for(int j=0;j<3;j++){
+                 hanshu+=exp[i+j];
+            }
+            ret.enqueue(hanshu);
+            hanshu.clear();
+        }else if(exp[i]=="l"&&exp[i+1]=="n"){
+            for(int j=0;j<2;j++){
+                 hanshu+=exp[i+j];
+            }
+            ret.enqueue(hanshu);
+            hanshu.clear();
         }
         else if(exp[i]=="+"||exp[i]=="-"){
             if(num.isEmpty()){
@@ -475,10 +541,10 @@ QQueue<QString> Widget::Transfer(QQueue<QString> &exp)
             symbol=exp.dequeue();
             if(symbol.length()>=2){
                 if(symbol.startsWith("0x")){
-                    int val;
-                    symbol=symbol.mid(2);
-                    val=symbol.toInt(&ok,16);
-                    symbol=symbol.setNum(val,10);
+                        int val;
+                        symbol=symbol.mid(2);
+                        val=symbol.toInt(&ok,16);
+                        symbol=symbol.setNum(val,10);
                 }else if(symbol.startsWith("0b")){
                     symbol=symbol.mid(2);
                     int val=symbol.toInt(&ok,2);
@@ -509,7 +575,13 @@ QQueue<QString> Widget::Transfer(QQueue<QString> &exp)
                    ret.enqueue(stack.pop());
                 }
                 stack.push(symbol);
-            }else if(symbol=="("){
+            }else if(symbol=="cos"||symbol=="sin"||symbol=="tan"||symbol=="log"||symbol=="ln"){
+                while (!stack.isEmpty()&&(stack.top()!="(")&&(stack.top()!="+")&&(stack.top()!="-")&&(stack.top()!="*")&&(stack.top()!="/")&&(stack.top()!="%")&&(stack.top()!="^")) {
+                   ret.enqueue(stack.pop());
+                }
+                stack.push(symbol);
+            }
+            else if(symbol=="("){
                 stack.push(symbol);
             }else if(symbol==")"){
                 while (!stack.isEmpty()&&(stack.top())!="("){
@@ -554,11 +626,42 @@ QString Widget::QCalculate(QString &l, QString &op, QString &r)
         }
     }else if(op=="^"){
         result=pow(left,right);
+    }else if(op=="log"){
+        if((left<(0.000000000000001))||(right<(0.000000000000001))){
+            return NULL;
+        }else{
+            result=qLn(right)/qLn(left);
+        }
     }
 
    ret.sprintf("%f",result);
+   return ret;
+}
+
+QString Widget::HCalculate(QString &op, QString &r)
+{
+    double right,result;
+    QString ret="";
+    right=r.toDouble();
+
+    if(op=="cos"){
+        result=qCos(right);
+    }else if(op=="sin"){
+        result=qSin(right);
+    }else if(op=="tan"){
+        result=qTan(right);
+    }else if(op=="ln"){
+        if(right>0){
+            result=qLn(right);
+        }else{
+            return NULL;
+        }
+    }
+    ret.sprintf("%f",result);
     return ret;
 }
+
+
 
 QString Widget::Calculate(QQueue<QString> &exp)
 {
@@ -573,12 +676,19 @@ QString Widget::Calculate(QQueue<QString> &exp)
         if(num_ok){
             stack.push(symbol);  //数字压栈
         }else{
-            if(stack.size()<2){  //栈中数字小于2但有运算符
-                return "Error";
+
+
+            if((symbol=="+")||(symbol=="-")||(symbol=="*")||(symbol=="/")||(symbol=="%")||(symbol=="^")||(symbol=="log")){
+                if(stack.size()<2){  //栈中数字小于2但有运算符
+                    return "Error";
+                }
+                R=stack.pop();
+                L=stack.pop();
+                ret=QCalculate(L,symbol,R);
+            }else{
+                R=R=stack.pop();
+                ret=HCalculate(symbol,R);
             }
-            R=stack.pop();
-            L=stack.pop();
-            ret=QCalculate(L,symbol,R);
             if(ret==NULL){
                 return ret;
             }
